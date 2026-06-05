@@ -11,6 +11,11 @@ INSERT INTO articles (id, title, summary, content, category_id, author, status, 
   (2, '学习贯彻最新会议精神', '深入解读会议核心要义', '会议强调，要坚定不移……', 2, '理论学习中心组', 'published', JSON_ARRAY('时政'), CURRENT_TIMESTAMP(3)),
   (3, '草稿：英雄事迹征集启事', '面向全单位征集身边的英模故事', '现面向全体职工征集……', 3, '编辑部', 'draft', JSON_ARRAY('征集'), NULL);
 
-INSERT INTO activities (id, title, description, location, start_time, end_time, capacity) VALUES
-  (1, '红色教育基地参观学习', '组织参观本地革命纪念馆，重温入党誓词', '市革命纪念馆', '2026-07-01 09:00:00.000', '2026-07-01 12:00:00.000', 50),
-  (2, '爱国主义主题宣讲会', '邀请专家开展专题宣讲', '单位多功能厅', '2026-07-15 14:00:00.000', '2026-07-15 16:00:00.000', 2);
+INSERT INTO activities (id, title, description, location, start_time, end_time, capacity, registration_deadline, checkin_start, checkin_end, is_hot) VALUES
+  (1, '红色教育基地参观学习', '组织参观本地革命纪念馆，重温入党誓词', '市革命纪念馆', '2026-07-01 09:00:00.000', '2026-07-01 12:00:00.000', 50, '2026-06-30 18:00:00.000', '2026-07-01 08:30:00.000', '2026-07-01 09:30:00.000', 1),
+  (2, '爱国主义主题宣讲会', '邀请专家开展专题宣讲', '单位多功能厅', '2026-07-15 14:00:00.000', '2026-07-15 16:00:00.000', 2, '2026-07-14 18:00:00.000', '2026-07-15 13:30:00.000', '2026-07-15 14:30:00.000', 0);
+
+INSERT INTO system_config (config_key, config_value, description) VALUES
+  ('absent_threshold', '3', '累计缺席次数阈值，达到后限制报名热门活动'),
+  ('restriction_days', '30', '失信限制天数，达到缺席阈值后限制报名的天数'),
+  ('hot_activity_capacity_threshold', '50', '热门活动名额判定阈值（名额<=该值视为热门，或is_hot=1）');
